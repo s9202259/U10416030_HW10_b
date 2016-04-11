@@ -3,19 +3,21 @@
 import java.util.*;
 
 public class BubbleSort {
-	public static void main(String args) {
+	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		
 		System.out.println("Enter an number as how many integers you want to sort");
-		int howMany = input.nextInt();
+		int howMany = input.nextInt();	//store the nubmer of integers
 		int[] bubble = new int[howMany];
 		
 		for(int i = 0; i < howMany; i++) {
-			System.out.println("Enter number: ");
+			System.out.println("Enter number: " + (i + 1));
 			bubble[i] = input.nextInt();
 		}
 		
-		Bubble sort = new Bubble(bubble);
+		Sort sort = new Sort(bubble);
+		
+		System.out.println("Bubble Sort : ");
 		
 		for (int n = 0; n < howMany; n++) {
 			sort.printSort(n);
@@ -23,29 +25,29 @@ public class BubbleSort {
 	}
 }
 
-class Bubble {
+class Sort {
 	int arrayLength;
 	int[] sortArray = new int[arrayLength];
-	int h;
 	
-	Bubble(int array[]) {
+	Sort(int array[]) {
 		arrayLength = array.length;
 		sortArray = array;
 		cal();
 	}
 	
 	public void cal() {
-		for (int i = 0; i < arrayLength; i++) {
-			for (int j = 0; j < arrayLength - i; j++) {
-				if (sortArray[j] < sortArray[j + 1]) {
-					h = sortArray[j + 1];
-					sortArray[j + 1] = sortArray[j];
-					sortArray[j] = h;
+		int hold;	//save the value of sortArray
+		for (int i = 0; i < arrayLength; i++) {	//solve bubble sort
+			for (int j = 1; j < (arrayLength - i); j++) {
+				if (sortArray[j - 1] > sortArray[j]) {
+					hold = sortArray[j];
+					sortArray[j] = sortArray[j - 1];
+					sortArray[j - 1] = hold;
 				}
 			}
 		}
 	}
-	public void printSort(int n) {
-		System.out.println(sortArray[n]);
+	public void printSort(int n) {	//print out outcome
+		System.out.print(sortArray[n] + ", ");
 	}
 }
